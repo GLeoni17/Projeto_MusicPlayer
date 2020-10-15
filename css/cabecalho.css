@@ -1,0 +1,40 @@
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 0px 20px;
+    text-align: center;
+}
+
+a:hover{
+    background-color:rgba(255, 255, 255, .3);
+}
+
+nav{
+    background-color:black;
+    height: 40px;
+}
+
+#ul-principal{
+    background-color:blue;
+    width:90%;
+    margin: auto;
+}
+
+.li-p{
+    line-height:40px;
+    float:left;
+}
+
+ul li ul li{
+    background-color:black;
+}
+
+.ul-cadastro, .ul-listar{
+    display:none;
+    background-color:red;
+}
