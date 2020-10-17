@@ -9,9 +9,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MusicPlayer</title>
-    <script src="./jquery-3.5.1.min.js"></script>
+    
     <link rel="icon" href="./images/icon.svg" />
-
 
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/animations.css" />
@@ -23,10 +22,8 @@
       rel="stylesheet"
     />
     
-    
-    
   </head>
-  <body>
+  <body id="body">
     <div id="page-landing">
       <div class="container">
 
@@ -41,7 +38,7 @@
             <!--href="escolher_registrar.php"-->
 
             <a
-              
+              href="escolher_registrar.php"
               title="Tocar playlist"
               class="animate-up"
             >

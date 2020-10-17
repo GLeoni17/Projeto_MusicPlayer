@@ -1,5 +1,16 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    background: linear-gradient(329.59deg, #264599 0%, #4167c0 100%) no-repeat;
+    background-size: 100%;
+}
+
 ul{
     list-style: none;
+    
 }
 
 a{
@@ -36,5 +47,4 @@ ul li ul li{
 
 .ul-cadastro, .ul-listar{
     display:none;
-    background-color:red;
 }

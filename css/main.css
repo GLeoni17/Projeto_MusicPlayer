@@ -15,10 +15,11 @@ body{
 
 body, input, button, textarea{
     font: 400 1.8rem/1 'Nunito', sans-serif;
+    background: 100px;
 }
 #botao-play{
-    width: 8rem;
-    height: 8rem;
+    width: 20rem;
+    height: 20rem;
 }
 
 

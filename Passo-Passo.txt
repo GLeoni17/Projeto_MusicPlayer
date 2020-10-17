@@ -1,0 +1,9 @@
+1. Criar banco de dados
+1.1 Criar cada tabela e ligar com a chave estrangeira
+1.2 Mudar lingua pra utf-8 general ci
+--------------------------------
+
+2. Fazer site para escolher o que fazer
+3. Criar as paginas de registrar e listar
+4. Testar
+5. CSS
