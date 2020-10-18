@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +7,48 @@
 </head>
 <body>
     <a href="escolher_registrar.php"><img src="./images/seta_esquerda.png" alt="Retornar ao menu" width="20px" height="20px">Voltar ao menu</a><br><br>
+    <form action="listar_playlist.php" method="post">
+        <select name="playlist_filtrar">
+            <option label="::Filtrar por Playlist"></option>
+            <?php
+                include "conexao.php";
+                $select = "SELECT * FROM playlist ORDER BY nome";
+                $res = mysqli_query($con, $select);
+                while ($row = mysqli_fetch_assoc($res)){
+                    $id = $row['id_playlist'];
+                    $nome = $row['nome'];
+                    echo "<option value='$id'>$nome</option>";
+                }
+            ?>
+        </select>
+        
+        <button>Filtrar</button>
+    </form>
 <?php
     include "conexao.php";
 
-    $select = "SELECT * FROM playlist ORDER BY nome";
+    $select = "SELECT * FROM playlist ";
+    
+    if($_POST){
+        $playlist_filtrar = $_POST['playlist_filtrar'];
+        $select .= "WHERE playlist.id_playlist like '%$playlist_filtrar%' ";
+    }
+
+    $select .= "ORDER BY nome";
     $res = mysqli_query($con, $select)
             or die(mysqli_error($con));
     while($row = mysqli_fetch_assoc($res)){
         $id_playlist = $row["id_playlist"];
-        $select2 = "SELECT musica.nome as nome_musica, musica.youtube as url_youtube,
+        $select2 = "SELECT playlist.nome as nome_playlist, musica.nome as nome_musica, musica.youtube as url_youtube,
                     banda.nome as nome_banda, genero.nome as nome_genero  
                     FROM musica_playlist 
                     INNER JOIN playlist ON musica_playlist.cod_playlist = playlist.id_playlist 
                     INNER JOIN musica ON musica_playlist.cod_musica = musica.id_musica
                     INNER JOIN banda ON musica.cod_banda = banda.id_banda
                     INNER JOIN genero ON banda.cod_genero=genero.id_genero
-                    WHERE cod_playlist = '$id_playlist'
-                    ORDER BY musica_playlist.id_musica_playlist, playlist.nome, musica.nome";
+                    WHERE cod_playlist = '$id_playlist' ";
+
+        $select2 .= "ORDER BY musica_playlist.id_musica_playlist, playlist.nome, musica.nome";
         $res2 = mysqli_query($con, $select2);
         echo "<b>".$row["nome"]."</b><br><br>";
         while($row2 = mysqli_fetch_assoc($res2)){
