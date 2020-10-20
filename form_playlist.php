@@ -1,24 +1,45 @@
+<?php 
+include "bottom_navbar.php"; 
+include "funcoes.php"; 
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Playlist</title>
+    <link rel="stylesheet" href="./css/forms.css" />
+    <link rel="icon" href="./images/icon.svg" />
+    <style>
+        .box_playlist{
+            width: 325px;
+            background: #fff;
+            border-radius: 5px;
+            <?php
+                $tamanho = form_playlist_tamanho();
+                echo "height: ".$tamanho."px";
+            ?>
+        }
+    </style>
+    
 </head>
 <body>
-    <form action="cadastrar_playlist.php" method="post">
-        <input type="text" name="nome_playlist" placeholder="Nome da Playlist..."><br>
-        <?php 
-        include "conexao.php";
-            $select = "SELECT musica.nome as nome_musica, musica.id_musica as id_musica, banda.nome as nome_banda, genero.nome as nome_genero FROM musica
-            INNER JOIN banda ON musica.cod_banda=banda.id_banda INNER JOIN genero ON banda.cod_genero=genero.id_genero 
-            ORDER BY musica.nome, banda.nome, genero.nome";
-            $res = mysqli_query($con, $select);
-            while($row = mysqli_fetch_array($res)){
-                echo "<input type='checkbox' name= 'nome_musica[]' value=".$row["id_musica"]."><b>".$row["nome_musica"]."</b> - ".$row["nome_banda"]." (".$row["nome_genero"].") <br>";
-            }
-        ?>
-        <button>Cadastrar</button>
+    <form class="form-signin" action="cadastrar_playlist.php" method="post">
+    <div class="text-center mb-4 container_centraliza">
+        <div class="box_playlist">
+        <br>
+        <h1 class="h3 mb-3 font-weight-normal">Cadastro de Playlist</h1>
+        <input type="text" name="nome_playlist" placeholder="Nome da Playlist...">
+        <div class="rolagem">
+            <?php 
+                form_playlist();
+            ?>
+        </div>
+        <br><br>
+        <button class="btn btn-lg btn-primary">Cadastrar</button>
+        </div>
+    </div>
     </form>
 </body>
 </html>
