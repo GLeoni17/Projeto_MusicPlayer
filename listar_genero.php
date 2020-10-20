@@ -1,34 +1,39 @@
+<?php 
+    include "bottom_navbar.php";
+    include "funcoes.php";
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listar Genero</title>
+    <link rel="stylesheet" href="./css/listar.css" />
+    <link rel="icon" href="./images/icon.svg" />
 </head>
+<style>
+        <?php echo ".box{
+            height:".listar_genero_tamanho()."px
+        }
+        ";
+        ?>
+</style>
 <body>
-    <a href="escolher_registrar.php"><img src="./images/seta_esquerda.png" alt="Retornar ao menu" width="20px" height="20px">Voltar ao menu</a><br><br>
-    <form action="listar_genero.php" method="post">
-        <input type="text" name="genero_filtrar" placeholder="Filtrar vizualização de genero...">
-        <button>Filtrar</button>
+    <form class="form-signin" action="listar_genero.php" method="post">
+        <div class="text-center mb-4 container_centraliza">
+            <div class="box">
+                    <br><br>
+                    <h1 class="h3 mb-3 font-weight-normal">Listar Gêneros</h1>
+                    <input type="text" name="genero_filtrar" placeholder="Filtrar gênero..."><br>
+                    <?php
+                        listar_genero();
+                    ?>
+                    <br>
+                    <button class="btn btn-lg btn-primary">Filtrar</button>
+            </div>
+        </div>
     </form>
     
-    <?php
-        include "conexao.php";
-        $select = "SELECT nome FROM genero ";
-
-        if($_POST) {
-            $genero_filtrar = $_POST["genero_filtrar"];
-            $select.="WHERE nome like '%$genero_filtrar%' ";
-        }
-        $select.="ORDER BY nome";
-
-        $res = mysqli_query($con, $select)
-                or die(mysqli_error($con));
-        echo "<ul>";
-        while($row = mysqli_fetch_array($res)){
-            echo "<li>".$row["nome"]."</li>";
-        }
-        echo "</ul>";
-    ?>
+    
 </body>
 </html>

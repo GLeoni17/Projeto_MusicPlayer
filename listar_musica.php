@@ -1,3 +1,8 @@
+<?php
+    include "bottom_navbar.php";
+    include "funcoes.php";
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -19,61 +24,42 @@
             });
         });
     </script>
+    <style>
+        <?php echo ".box{
+            height:".listar_musicas_tamanho()."px
+        }
+        ";
+        ?>
+    </style>
+    <link rel="stylesheet" href="./css/listar.css" />
+    <link rel="icon" href="./images/icon.svg" />
 </head>
 <body>
-    <a href="escolher_registrar.php"><img src="./images/seta_esquerda.png" alt="Retornar ao menu" width="20px" height="20px">Voltar ao menu</a><br><br>
-    <form action="listar_musica.php" method="post">
-        <select name="genero_filtrar" id="genero_filtrar">
-            <option label="Gênero da Musica"></option>
-            <?php
-                include "conexao.php";
-                $select = "SELECT * FROM genero ORDER BY nome";
-                $res = mysqli_query($con, $select);
-                while ($row = mysqli_fetch_assoc($res)){
-                    $id = $row['id_genero'];
-                    $nome = $row['nome'];
-                    echo "<option value='$id'>$nome</option>";
-                }
-            ?>
-        </select>
-        <br>
-        <select name="banda_filtrar" id="banda_filtrar">
-            <option label="Banda da Musica"></option>
-        </select>
-        <input type="text" name="musica_filtrar" placeholder="Filtrar vizualização de musica...">
-        <button>Filtrar</button>
+    <form class="form-signin" action="listar_musica.php" method="post">
+        <div class="text-center mb-4 container_centraliza">
+            <div class="box">
+                <br><br>
+                <h1 class="h3 mb-3 font-weight-normal">Listar Musicas</h1>
+                <select name="genero_filtrar" id="genero_filtrar">
+                    <option label="Gênero da Musica"></option>
+                    <?php
+                        listar_genero_select();
+                    ?>
+                </select>
+                <br><br>
+                <select name="banda_filtrar" id="banda_filtrar">
+                    <option label="Banda da Musica"></option>
+                </select>
+                <br><br>
+                <input type="text" name="musica_filtrar" placeholder="Filtrar musicas..."><br>
+                <?php
+                    listar_musicas();
+                ?><br><br>
+                <button class="btn btn-lg btn-primary">Filtrar</button>
+            </div>
+        </div>
+        
     </form>
-<?php
-    include "conexao.php";
-    $select = "SELECT musica.nome as nome_musica, banda.nome as nome_banda, genero.nome as nome_genero, 
-               genero.id_genero as id_genero, banda.id_banda as id_banda FROM musica
-               INNER JOIN banda ON musica.cod_banda=banda.id_banda 
-               INNER JOIN genero ON banda.cod_genero=genero.id_genero ";
 
-    if($_POST){
-        $select .= "WHERE 1=1 ";
-        if($_POST["genero_filtrar"]){
-            $genero_filtrar = $_POST["genero_filtrar"];
-            $select .= "AND id_genero like '%$genero_filtrar%' ";
-        }
-        if($_POST["banda_filtrar"]){
-            $banda_filtrar = $_POST["banda_filtrar"];
-            $select .= "AND id_banda like '%$banda_filtrar%' ";
-        }
-        if($_POST["musica_filtrar"] != ""){
-            $musica_filtrar = $_POST["musica_filtrar"];
-            $select .= "AND musica.nome like '%$musica_filtrar%' ";
-        }
-    }
-
-    $select .= "ORDER BY musica.nome, banda.nome, genero.nome";
-
-    $res = mysqli_query($con, $select);
-    echo "<ul>";
-    while($row = mysqli_fetch_array($res)){
-        echo "<li>::".$row["nome_musica"].":: ".$row["nome_banda"]." (<b>".$row["nome_genero"]."</b>)</li>";
-    }
-    echo "</ul>";
-?>
 </body>
 </hmtl>

@@ -5,27 +5,29 @@ html{
 .container_centraliza {
         width: 100vw;
         height: 100vh;
-        background: #6C7A89;
+        background: linear-gradient(329.59deg, #4365c2 0%, #5b7dce 100%) no-repeat;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
     }
     .box {
-        width: 300px;
-        height: 300px;
+        width: 600px;
         background: #fff;
         border-radius: 5px;
     }
     body {
         margin: 0px;
     }
-    .box_musica{
-        width: 325px;
-        height: 400px;
-        background: #fff;
-        border-radius: 5px;
-    }
     input{ 
         text-align: center;
     }
+    .ul_listar{
+        text-align: left;
+        margin: 20px;
+        font-size: 25px;
+    }
+    botao_filtrar{
+        margin-bottom: 5%;
+    }
+    

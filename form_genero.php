@@ -20,7 +20,7 @@
         <div class="text-center mb-4 container_centraliza">
             <div class="box">
                 <br><br><br>
-                <h1 class="h3 mb-3 font-weight-normal">Cadastro de Genero</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Cadastro de Gênero</h1>
                 <input type="text" name="nome_genero" placeholder="Nome do gênero..." required><br><br>
                 <button class="btn btn-lg btn-primary">Cadastrar</button>
             </div>
