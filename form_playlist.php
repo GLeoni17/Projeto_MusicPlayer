@@ -13,9 +13,10 @@ include "funcoes.php";
     <link rel="icon" href="./images/icon.svg" />
     <style>
         .box_playlist{
-            width: 325px;
+            width: 300px;
             background: #fff;
             border-radius: 5px;
+            animation-delay:200ms;
             <?php
                 $tamanho = form_playlist_tamanho();
                 echo "height: ".$tamanho."px";

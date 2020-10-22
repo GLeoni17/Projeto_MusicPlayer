@@ -1,3 +1,6 @@
+<?php
+    include "bottom_navbar.php"; 
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -8,19 +11,15 @@
 
 </head>
 <body>
-    <section class="jumbotron text-center">
+    <section class="text-center">
         <div class="container" id="Cadastre_musicas">
 
         <?php 
-            include "conexao.php";
+            /*include "conexao.php";
             $select = "SELECT id_musica FROM musica ORDER BY id_musica DESC";
             $res = mysqli_query($con, $select);
             $maior_num = mysqli_fetch_assoc($res);
             if ($maior_num["id_musica"]){
-                echo "<h3 class='text-center'>Enquanto isso, aproveite uma musica que você já registrou!<h3>
-                    </div>
-                    </section>
-                    <div id='musica_aleatoria' class='center' align='center'>";
                 $musica = rand(1, $maior_num["id_musica"]);
                 $select = "SELECT youtube FROM musica WHERE id_musica like '$musica'";
                 $res = mysqli_query($con, $select);
@@ -29,13 +28,9 @@
                         frameborder='0' allow='accelerometer'; autoplay; clipboard-white; encrypted-media; gyroscope; 
                         picture-in-picture; allowfullscreen></iframe>
                         </div>";
-            }else{
-                echo "<h3 class='text-center'>Ops, você ainda não registrou nenhuma musica, registra ai!<h3>
-                    </div>";
-            }
-            
-            include "bottom_navbar.php"; 
+            }*/
         ?>
+        </div>
     
 </body>
 </html>

@@ -17,10 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de Dados: `musicplayer`
+-- Base de Dados: `glmusicplayer`
 --
-CREATE DATABASE IF NOT EXISTS `musicplayer` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `musicplayer`;
+CREATE DATABASE IF NOT EXISTS `glmusicplayer` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `glmusicplayer`;
 
 -- --------------------------------------------------------
 

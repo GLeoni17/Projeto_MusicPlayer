@@ -11,19 +11,12 @@
     <link rel="stylesheet" href="./css/listar.css" />
     <link rel="icon" href="./images/icon.svg" />
 </head>
-<style>
-        <?php echo ".box{
-            height:".listar_banda_tamanho()."px
-        }
-        ";
-        ?>
-</style>
 <body>
     <form class="form-signin" action="listar_banda.php" method="post">
         <div class="text-center mb-4 container_centraliza">
             <div class="box">
                 <br><br>
-                <h1 class="h3 mb-3 font-weight-normal">Listar Bandas</h1>
+                <h3 class="mb-3 font-weight-normal">Listar Bandas</h3>
                 <select name="genero_filtrar">
                     <option label="Gênero da Banda"></option>
                     <?php
@@ -31,11 +24,11 @@
                     ?>
                 </select><br><br>
                 <input type="text" name="banda_filtrar" placeholder="Filtrar bandas..."><br><br>
-                
+                <button class="btn btn-lg btn-primary">Filtrar</button><br><br>
                 <?php
                     listar_banda()
                 ?>
-                <button class="btn btn-lg btn-primary">Filtrar</button>
+                
             </div>
         </div>
         

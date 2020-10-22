@@ -243,7 +243,7 @@
 
             $select2 .= "ORDER BY musica_playlist.id_musica_playlist, playlist.nome, musica.nome";
             $res2 = mysqli_query($con, $select2);
-            echo "<b>".$row["nome"]."</b><br><br>";
+            echo "<h2><b>".$row["nome"]."</b></h2><br>";
             while($row2 = mysqli_fetch_assoc($res2)){
                 echo $row2["nome_musica"]."(<b>".$row2["nome_banda"]."</b>) <br> ".$row2["nome_genero"]." <br> <iframe width='400' height='200' src='https://www.youtube.com/embed/".$row2["url_youtube"]."' frameborder='0' allow='accelerometer'; autoplay; clipboard-white; encrypted-media; gyroscope; picture-in-picture; allowfullscreen></iframe><br>";
                 echo "<br>";

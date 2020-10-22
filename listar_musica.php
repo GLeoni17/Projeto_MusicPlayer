@@ -51,11 +51,12 @@
                     <option label="Banda da Musica"></option>
                 </select>
                 <br><br>
-                <input type="text" name="musica_filtrar" placeholder="Filtrar musicas..."><br>
+                <input type="text" name="musica_filtrar" placeholder="Filtrar musicas..."><br><br>
+                <button class="btn btn-lg btn-primary">Filtrar</button><br><br>
                 <?php
                     listar_musicas();
-                ?><br><br>
-                <button class="btn btn-lg btn-primary">Filtrar</button>
+                ?>
+                
             </div>
         </div>
         
