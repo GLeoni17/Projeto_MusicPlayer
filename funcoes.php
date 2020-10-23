@@ -54,21 +54,21 @@
 
     function listar_genero(){
         include "conexao.php";
-                    $select = "SELECT nome FROM genero ";
+        $select = "SELECT nome FROM genero ";
 
-                    if($_POST) {
-                        $genero_filtrar = $_POST["genero_filtrar"];
-                        $select.="WHERE nome like '%$genero_filtrar%' ";
-                    }
-                    $select.="ORDER BY nome";
+        if($_POST) {
+            $genero_filtrar = $_POST["genero_filtrar"];
+            $select.="WHERE nome like '%$genero_filtrar%' ";
+        }
+        $select.="ORDER BY nome";
 
-                    $res = mysqli_query($con, $select)
-                            or die(mysqli_error($con));
-                    echo "<ul class='ul_listar'>";
-                    while($row = mysqli_fetch_array($res)){
-                        echo "<li>".$row["nome"]."</li>";
-                    }
-                    echo "</ul>";
+        $res = mysqli_query($con, $select)
+                or die(mysqli_error($con));
+        echo "<ul class='ul_listar'>";
+        while($row = mysqli_fetch_array($res)){
+            echo "<li>".$row["nome"]."</li>";
+        }
+        echo "</ul>";               
     }
 
     //---Banda Listar---
@@ -194,32 +194,38 @@
         $select .= "ORDER BY nome";
         $res = mysqli_query($con, $select)
                 or die(mysqli_error($con));
-        while($row = mysqli_fetch_assoc($res)){
+            while($row = mysqli_fetch_assoc($res)){
 
-            if($testehr>0){
-                echo "<hr>";
+                echo "<style> body{ height:100%; }</style>";
+
+                if($testehr>0){
+                    echo "<hr>";
+                }
+    
+                $id_playlist = $row["id_playlist"];
+                $select2 = "SELECT playlist.nome as nome_playlist, musica.nome as nome_musica, musica.youtube as url_youtube,
+                            banda.nome as nome_banda, genero.nome as nome_genero  
+                            FROM musica_playlist 
+                            INNER JOIN playlist ON musica_playlist.cod_playlist = playlist.id_playlist 
+                            INNER JOIN musica ON musica_playlist.cod_musica = musica.id_musica
+                            INNER JOIN banda ON musica.cod_banda = banda.id_banda
+                            INNER JOIN genero ON banda.cod_genero=genero.id_genero
+                            WHERE cod_playlist = '$id_playlist' ";
+    
+                $select2 .= "ORDER BY musica_playlist.id_musica_playlist, playlist.nome, musica.nome";
+                $res2 = mysqli_query($con, $select2);
+                echo "<h2><b>".$row["nome"]."</b></h2><br>";
+                while($row2 = mysqli_fetch_assoc($res2)){
+                    
+                    echo $row2["nome_musica"]."(<b>".$row2["nome_banda"]."</b>) <br> ".$row2["nome_genero"]." <br> <iframe width='400' height='200' src='https://www.youtube.com/embed/".$row2["url_youtube"]."' frameborder='0' allow='accelerometer'; autoplay; clipboard-white; encrypted-media; gyroscope; picture-in-picture; allowfullscreen></iframe><br>";
+                    echo "<br>";
+                }
+                $testehr++; 
             }
-
-            $id_playlist = $row["id_playlist"];
-            $select2 = "SELECT playlist.nome as nome_playlist, musica.nome as nome_musica, musica.youtube as url_youtube,
-                        banda.nome as nome_banda, genero.nome as nome_genero  
-                        FROM musica_playlist 
-                        INNER JOIN playlist ON musica_playlist.cod_playlist = playlist.id_playlist 
-                        INNER JOIN musica ON musica_playlist.cod_musica = musica.id_musica
-                        INNER JOIN banda ON musica.cod_banda = banda.id_banda
-                        INNER JOIN genero ON banda.cod_genero=genero.id_genero
-                        WHERE cod_playlist = '$id_playlist' ";
-
-            $select2 .= "ORDER BY musica_playlist.id_musica_playlist, playlist.nome, musica.nome";
-            $res2 = mysqli_query($con, $select2);
-            echo "<h2><b>".$row["nome"]."</b></h2><br>";
-            while($row2 = mysqli_fetch_assoc($res2)){
-                
-                echo $row2["nome_musica"]."(<b>".$row2["nome_banda"]."</b>) <br> ".$row2["nome_genero"]." <br> <iframe width='400' height='200' src='https://www.youtube.com/embed/".$row2["url_youtube"]."' frameborder='0' allow='accelerometer'; autoplay; clipboard-white; encrypted-media; gyroscope; picture-in-picture; allowfullscreen></iframe><br>";
-                echo "<br>";
-            }
-            $testehr++; 
-        }
+        if($testehr == 0){
+            echo "<style> body{ height:100vh; }</style>";
+        }          
+        
     }
 
     function selecionar_playlist(){
