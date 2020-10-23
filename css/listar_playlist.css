@@ -14,7 +14,7 @@ html{
 body {
     background: linear-gradient(329.59deg, #8598cc 0%, #617dbf 100%) no-repeat;
     width: 100%;
-    height: 100%;
+    height: max(100vh, 100%);
 }
 .box_musica{
     width: 300px;
