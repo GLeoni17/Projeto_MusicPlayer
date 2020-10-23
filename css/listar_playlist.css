@@ -1,15 +1,15 @@
 html{
     overflow-x:hidden;
     font: 400 1rem/1 'Nunito', sans-serif;
-    height: 100%;
 }
 body {
     background: linear-gradient(329.59deg, #8598cc 0%, #617dbf 100%) no-repeat;
     width: 100%;
+    height: 100%;
 }
 .container_centraliza {
     width: 100vw;
-    height: 100%;
+    height: max(100vh, 100%);
     display: flex;
     flex-direction: row;
     justify-content: center;
