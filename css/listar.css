@@ -57,5 +57,9 @@ textarea{
 }
 botao_filtrar{
     margin-bottom: 5%;
-}    
+}
+iframe{
+    border-radius: 3px;
+}        
+        
     
