@@ -1,5 +1,7 @@
 <?php 
 
+    //---Banda Form---
+
     function form_banda(){
         include "conexao.php";
         $select = "SELECT * FROM genero ORDER BY nome";
@@ -10,6 +12,8 @@
         }
     }
 
+    //---Musica Form---
+
     function form_musica(){
         include "conexao.php";
         $select = "SELECT * FROM genero ORDER BY nome";
@@ -18,6 +22,8 @@
             echo "<option value=".$row["id_genero"].">".$row["nome"]."</option>";
         }
     }
+
+    //---Playlist Form---
 
     function form_playlist(){
         include "conexao.php";
@@ -44,6 +50,8 @@
         return $tamanho;
     }
 
+    //---Genero listar---
+
     function listar_genero(){
         include "conexao.php";
                     $select = "SELECT nome FROM genero ";
@@ -63,27 +71,11 @@
                     echo "</ul>";
     }
 
-    function listar_genero_tamanho(){
-        include "conexao.php";
-        $select = "SELECT nome FROM genero ";
-        if($_POST) {
-            $genero_filtrar = $_POST["genero_filtrar"];
-            $select.="WHERE nome like '%$genero_filtrar%' ";
-        }
-        $select.="ORDER BY nome";
-
-        $res = mysqli_query($con, $select)
-            or die(mysqli_error($con));
-        $tamanho = 225;
-        while($row = mysqli_fetch_array($res)){
-            $tamanho = $tamanho + 55;
-        }
-        return $tamanho;
-    }
+    //---Banda Listar---
 
     function listar_banda(){
         include "conexao.php";
-    $select = "SELECT banda.nome as nome_banda, genero.nome as nome_genero, genero.id_genero as id_genero FROM banda
+        $select = "SELECT banda.nome as nome_banda, genero.nome as nome_genero, genero.id_genero as id_genero FROM banda
                INNER JOIN genero ON banda.cod_genero=genero.id_genero ";
 
         if($_POST){
@@ -119,32 +111,7 @@
             
     }
 
-    function listar_banda_tamanho(){
-        include "conexao.php";
-        $select = "SELECT banda.nome as nome_banda, genero.nome as nome_genero, genero.id_genero as id_genero FROM banda
-               INNER JOIN genero ON banda.cod_genero=genero.id_genero ";
-
-        if($_POST){
-            $select .= "WHERE (1=1) ";
-            if($_POST["banda_filtrar"]){
-                $banda_filtrar = $_POST["banda_filtrar"];
-                $select .= "AND banda.nome like '%$banda_filtrar%' ";
-            }
-            if($_POST["genero_filtrar"]){
-                $genero_filtrar = $_POST["genero_filtrar"];
-                $select .= "AND genero.id_genero like '%$genero_filtrar%' ";
-            }
-        }           
-
-        $res = mysqli_query($con, $select)
-            or die(mysqli_error($con));
-        $tamanho = 275;
-        while($row = mysqli_fetch_array($res)){
-            $tamanho = $tamanho + 55;
-        }
-        return $tamanho;
-    }
-
+    //---Musica Listar---
     function listar_musicas(){
         include "conexao.php";
         $select = "SELECT musica.nome as nome_musica, banda.nome as nome_banda, genero.nome as nome_genero, 
@@ -212,6 +179,8 @@
         return $tamanho;
     }
 
+    //---Playlist Listar---
+
     function listar_playlist(){
         include "conexao.php";
 
@@ -245,6 +214,7 @@
             $res2 = mysqli_query($con, $select2);
             echo "<h2><b>".$row["nome"]."</b></h2><br>";
             while($row2 = mysqli_fetch_assoc($res2)){
+                
                 echo $row2["nome_musica"]."(<b>".$row2["nome_banda"]."</b>) <br> ".$row2["nome_genero"]." <br> <iframe width='400' height='200' src='https://www.youtube.com/embed/".$row2["url_youtube"]."' frameborder='0' allow='accelerometer'; autoplay; clipboard-white; encrypted-media; gyroscope; picture-in-picture; allowfullscreen></iframe><br>";
                 echo "<br>";
             }
